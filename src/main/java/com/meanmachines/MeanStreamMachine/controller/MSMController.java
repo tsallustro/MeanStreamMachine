@@ -1,6 +1,5 @@
 package com.meanmachines.MeanStreamMachine.controller;
 
-import com.meanmachines.MeanStreamMachine.model.MediaDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ public class MSMController {
     //Media Details
 
     @GetMapping("/details/{id}")
-    public ResponseEntity<MediaDetails> getDetailsById(@PathVariable UUID id) {
+    public ResponseEntity<HttpStatus> getDetailsById(@PathVariable UUID id) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -26,6 +25,17 @@ public class MSMController {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
+    //Stream Controls
+
+    @GetMapping("/start/{id}")
+    public ResponseEntity<HttpStatus> startStream(@PathVariable UUID id) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @GetMapping("/stop/{streamId}")
+    public ResponseEntity<HttpStatus> getAllMedia(@PathVariable UUID streamId) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
 
     //Misc
     @GetMapping("/ping")
