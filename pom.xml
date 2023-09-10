@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.meanmachines</groupId>
     <artifactId>MeanStreamMachine</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.8</version>
     <name>MeanStreamMachine</name>
     <description>The Meanest of the Stream Machines</description>
     <properties>
@@ -18,7 +18,7 @@
     </properties>
     <packaging>jar</packaging>
     <build>
-        <finalName>${project.artifactId}_${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -36,6 +36,7 @@
 
     </build>
     <distributionManagement>
+
         <repository>
             <id>myMavenRepo</id>
             <url>https://mymavenrepo.com/repo/txzLGneIZ0DlUJu75fG5/</url> <!-->Write<!-->
