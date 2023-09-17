@@ -16,7 +16,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz) -> authz
                         .anyRequest().permitAll()
                 )
-                .httpBasic(withDefaults());
+                ;
         return http.build();
     }
 
