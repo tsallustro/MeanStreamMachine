@@ -1,7 +1,9 @@
 package com.meanmachines.MeanStreamMachine.controller;
 
-import com.meanmachines.MeanStreamMachine.model.dto.UploadDTO;
-import com.meanmachines.MeanStreamMachine.service.UploadService;
+import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
+import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
+import com.meanmachines.MeanStreamMachine.model.dto.response.UploadResponse;
+import com.meanmachines.MeanStreamMachine.service.MediaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,7 @@ public class MSMController {
 
 
     @Autowired
-    private UploadService uploadService;
+    private MediaService mediaService;
 
     @Autowired
     public MSMController() {
@@ -26,10 +28,9 @@ public class MSMController {
     //Media Details
 
     @GetMapping("/details/{mediaId}")
-    public ResponseEntity<HttpStatus> getDetailsById(@PathVariable UUID mediaId) {
+    public Media getDetailsById(@PathVariable UUID mediaId) {
         log.info("Recieved details request for " + mediaId);
-
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return mediaService.getMediaById(mediaId);
     }
 
     @GetMapping("/details/all")
@@ -60,11 +61,12 @@ public class MSMController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<HttpStatus> uploadMedia(@ModelAttribute UploadDTO requestdto){
-        log.info("Recieved upload request. Name is "+requestdto.getName()+"; Media size is "+requestdto.getMedia().getSize() + " bytes");
-        uploadService.processUpload(requestdto);
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public UploadResponse uploadMedia(@ModelAttribute UploadDTO requestdto) {
+        log.info("Recieved upload request. Name is " + requestdto.getName() + "; Media size is " + requestdto.getMedia().getSize() + " bytes");
+        UploadResponse response = new UploadResponse();
 
+        response.setMediaId(mediaService.processUpload(requestdto));
+        return response;
 
     }
 
@@ -74,7 +76,6 @@ public class MSMController {
         log.info("Recieved ping request");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 
 }

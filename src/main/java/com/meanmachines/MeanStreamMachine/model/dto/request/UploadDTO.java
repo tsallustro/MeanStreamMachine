@@ -1,4 +1,4 @@
-package com.meanmachines.MeanStreamMachine.model.dto;
+package com.meanmachines.MeanStreamMachine.model.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

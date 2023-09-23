@@ -30,8 +30,7 @@ public class StorageService {
     @Getter
     @Value("${storage.media-dir}")
     private Path mediaDirectory;
-    @Autowired
-    private MediaRepository mediaRepository;
+
     @Autowired
     public StorageService() {
 
@@ -72,10 +71,7 @@ public class StorageService {
         }
     }
 
-    public void storeAndWriteToDb(MultipartFile file, Media media){
-        store(file);
-        mediaRepository.save(media);
-    }
+
 
 
 
