@@ -1,27 +1,18 @@
 package com.meanmachines.MeanStreamMachine.service;
 
 import com.meanmachines.MeanStreamMachine.exception.StorageException;
-import com.meanmachines.MeanStreamMachine.exception.StorageFileNotFoundException;
-import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
-import com.meanmachines.MeanStreamMachine.repositories.MediaRepository;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.UUID;
-import java.util.stream.Stream;
 
 @Service
 

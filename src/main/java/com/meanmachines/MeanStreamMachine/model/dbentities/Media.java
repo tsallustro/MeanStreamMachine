@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -30,7 +32,15 @@ public class Media {
     @Column(name = "file_format", length = 10)
     private String fileFormat;
 
+    @Column(name="upload_date")
+    private Date uploadDate;
+
     public DetailsDTO toDto(){
-        return new DetailsDTO();
+        DetailsDTO dto = new DetailsDTO();
+        dto.setName(title);
+        dto.setType(fileFormat);
+        dto.setUploadedDate(uploadDate);
+
+        return dto;
     }
 }

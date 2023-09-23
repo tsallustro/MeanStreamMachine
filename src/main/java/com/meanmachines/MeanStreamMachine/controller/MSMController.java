@@ -2,6 +2,7 @@ package com.meanmachines.MeanStreamMachine.controller;
 
 import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
 import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
+import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
 import com.meanmachines.MeanStreamMachine.model.dto.response.UploadResponse;
 import com.meanmachines.MeanStreamMachine.service.MediaService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +29,9 @@ public class MSMController {
     //Media Details
 
     @GetMapping("/details/{mediaId}")
-    public Media getDetailsById(@PathVariable UUID mediaId) {
+    public DetailsDTO getDetailsById(@PathVariable UUID mediaId) {
         log.info("Recieved details request for " + mediaId);
-        return mediaService.getMediaById(mediaId);
+        return mediaService.getMediaById(mediaId).toDto();
     }
 
     @GetMapping("/details/all")

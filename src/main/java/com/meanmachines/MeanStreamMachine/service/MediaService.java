@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.UUID;
 @Slf4j
 @Service
@@ -48,7 +49,7 @@ public class MediaService {
         media.setTitle(name);
         media.setCanonicalName(canonicalName);
         media.setFileFormat(extension);
-
+        media.setUploadDate(new Date());
         storageService.store(mediaFile);
         return writeToDb(media);
     }
