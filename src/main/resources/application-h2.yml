@@ -11,3 +11,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
+
+storage:
+  media-dir: C:\Users\Tony\dev\MeanMachines\MeanStreamMachine\upload_tmp
+logging:
+  level:
+    root: info

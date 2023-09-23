@@ -1,9 +1,6 @@
 package com.meanmachines.MeanStreamMachine.model.dbentities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -20,15 +17,17 @@ public class Media {
     @Id
     @Column(name = "mediaId", nullable = false)
     @JdbcTypeCode(SqlTypes.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID mediaId;
 
     @Column(name = "title", nullable = false)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String title;
 
-    @Column(name = "mediaLength", nullable = false)
-    @JdbcTypeCode(SqlTypes.TIME)
-    private Time mediaLength;
+    @Column(name = "canonical_name")
+    private String canonicalName;
 
+    @Column(name = "file_format", length = 10)
+    private String fileFormat;
 
 }
