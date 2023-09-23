@@ -4,5 +4,10 @@ server:
   port: 60185
 
 spring:
+  application:
+    name: meanstreammachine
   jpa:
     show-sql: true
+logging:
+  level:
+    root: info
