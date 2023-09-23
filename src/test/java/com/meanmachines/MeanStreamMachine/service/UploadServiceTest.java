@@ -8,9 +8,9 @@ class UploadServiceTest {
 
     @Test
     void getCanonicalName() {
-        String original = "   white    space is cool    ";
-        String expected = "white_space_is_cool";
+        String original = "   white    space is  cool  2  ";
+        String expected = "white_space_is_cool_2";
 
-        assertEquals(expected, UploadService.toCanonicalName(original));
+        assertEquals(expected, MediaService.toCanonicalName(original));
     }
 }
