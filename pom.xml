@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.meanmachines</groupId>
-    <artifactId>MeanStreamMachine</artifactId>
+    <artifactId>meanstreammachine</artifactId>
     <version>23.9.23.1</version>
     <name>MeanStreamMachine</name>
     <description>The Meanest of the Stream Machines</description>
@@ -35,21 +35,63 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>${frontend-maven-plugin.version}</version>
+                <executions>
+                    <execution>
 
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+
+                    </execution>
+                    <execution>
+                        <id>install-node-and-yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>webpack build</id>
+                        <goals>
+                            <goal>webpack</goal>
+                        </goals>
+                        <configuration>
+                            <!-- optional: if not specified, it will run webpack's default
+                            build (and you can remove this whole <configuration> section.) -->
+                            <arguments>-p</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <yarnVersion>${yarn.version}</yarnVersion>
+                </configuration>
+            </plugin>
         </plugins>
-
     </build>
     <distributionManagement>
-
         <repository>
-            <id>myMavenRepo</id>
-            <url>https://mymavenrepo.com/repo/txzLGneIZ0DlUJu75fG5/</url> <!-->Write<!-->
-            
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/tsallustro/MeanStreamMachine</url>
         </repository>
-        <snapshotRepository>
-            <id>myMavenRepo</id>
-            <url>https://mymavenrepo.com/repo/txzLGneIZ0DlUJu75fG5/</url><!-->Write<!-->
-        </snapshotRepository>
     </distributionManagement>
     <dependencies>
         <dependency>
@@ -111,7 +153,6 @@
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-
 
 
 </project>

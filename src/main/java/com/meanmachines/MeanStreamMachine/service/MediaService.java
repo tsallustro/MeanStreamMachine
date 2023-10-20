@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
+
 @Slf4j
 @Service
 public class MediaService {
@@ -19,18 +21,23 @@ public class MediaService {
 
     @Autowired
     private StorageService storageService;
-    public UUID writeToDb(Media media){
-       Media m = mediaRepository.save(media);
-       return m.getMediaId();
+
+    public UUID writeToDb(Media media) {
+        Media m = mediaRepository.save(media);
+        return m.getMediaId();
     }
 
-    public Media getMediaById(UUID id){
+    public Media getMediaById(UUID id) {
         return mediaRepository.findByMediaId(id);
     }
 
-    public static String toCanonicalName(String str){
+    public List<Media> getAllMedia() {
+        return mediaRepository.selectAll();
+    }
 
-        return str.trim().replaceAll("\\s+","_");
+    public static String toCanonicalName(String str) {
+
+        return str.trim().replaceAll("\\s+", "_");
     }
 
     public UUID processUpload(UploadDTO requestdto) {
@@ -42,7 +49,7 @@ public class MediaService {
 
         //Canonical name
         String canonicalName = toCanonicalName(requestdto.getName());
-        log.info("Canonical name for "+requestdto.getName()+" is "+canonicalName);
+        log.info("Canonical name for " + requestdto.getName() + " is " + canonicalName);
 
 
         Media media = new Media();

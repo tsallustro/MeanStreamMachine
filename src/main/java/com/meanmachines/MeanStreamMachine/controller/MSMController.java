@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -28,24 +29,24 @@ public class MSMController {
 
     //Media Details
 
-    @GetMapping("/details/{mediaId}")
+    @GetMapping("/api/details/{mediaId}")
     public DetailsDTO getDetailsById(@PathVariable UUID mediaId) {
         log.info("Recieved details request for " + mediaId);
         return mediaService.getMediaById(mediaId).toDto();
     }
 
-    @GetMapping("/details/all")
-    public ResponseEntity<HttpStatus> getAllMedia() {
+    @GetMapping("/api/details/all")
+    public List<DetailsDTO> getAllMedia() {
 
 
         log.info("Recieved all media request");
 
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return DetailsDTO.mediaListToDetailDTOList(mediaService.getAllMedia());
     }
 
     //Stream Controls
 
-    @GetMapping("/start/{mediaId}")
+    @GetMapping("/api/start/{mediaId}")
     public ResponseEntity<HttpStatus> startStream(@PathVariable UUID mediaId) {
 
         log.info("Recieved start request for " + mediaId);
@@ -54,14 +55,14 @@ public class MSMController {
 
     }
 
-    @GetMapping("/stop/{streamId}")
+    @GetMapping("/api/stop/{streamId}")
     public ResponseEntity<HttpStatus> getAllMedia(@PathVariable UUID streamId) {
         log.info("Recieved stop request for " + streamId);
 
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/api/upload")
     public UploadResponse uploadMedia(@ModelAttribute UploadDTO requestdto) {
         log.info("Recieved upload request. Name is " + requestdto.getName() + "; Media size is " + requestdto.getMedia().getSize() + " bytes");
         UploadResponse response = new UploadResponse();
@@ -72,7 +73,7 @@ public class MSMController {
     }
 
     //Misc
-    @GetMapping("/ping")
+    @GetMapping("/api/ping")
     public ResponseEntity<HttpStatus> ping() {
         log.info("Recieved ping request");
         return new ResponseEntity<>(HttpStatus.OK);

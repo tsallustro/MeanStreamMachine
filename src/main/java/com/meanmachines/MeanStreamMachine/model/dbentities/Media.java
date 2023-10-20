@@ -17,7 +17,7 @@ import java.util.UUID;
 @Table(name = "media")
 public class Media {
     @Id
-    @Column(name = "mediaId", nullable = false)
+    @Column(name = "media_id", nullable = false)
     @JdbcTypeCode(SqlTypes.UUID)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID mediaId;

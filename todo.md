@@ -2,10 +2,13 @@
 
 ## Architecture
 * Set up new maven repo
+* Deploy and test
 
 ## Backend
 * Start/stop stream
-* Deploy and test
+* Security
+
 ## Frontend
 * Upload page
 * Details page
+* Login/logout
