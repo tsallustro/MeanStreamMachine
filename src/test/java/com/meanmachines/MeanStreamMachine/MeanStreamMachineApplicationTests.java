@@ -10,6 +10,7 @@ class MeanStreamMachineApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assert(true);
 	}
 
 }

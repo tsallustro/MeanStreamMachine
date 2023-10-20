@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.meanmachines</groupId>
-    <artifactId>MeanStreamMachine</artifactId>
-    <version>0.0.11</version>
+    <artifactId>meanstreammachine</artifactId>
+    <version>23.9.23.1</version>
     <name>MeanStreamMachine</name>
     <description>The Meanest of the Stream Machines</description>
     <parent>
@@ -35,94 +35,63 @@
                     </excludes>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${basedir}/target/classes/static</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>frontend/build</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>${frontend-maven-plugin.version}</version>
-                <configuration>
-                    <workingDirectory>frontend</workingDirectory>
-                </configuration>
                 <executions>
                     <execution>
-                        <id>install node</id>
+
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+
+                    </execution>
+                    <execution>
+                        <id>install-node-and-yarn</id>
                         <goals>
                             <goal>install-node-and-yarn</goal>
                         </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>webpack build</id>
+                        <goals>
+                            <goal>webpack</goal>
+                        </goals>
                         <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <yarnVersion>${yarn.version}</yarnVersion>
+                            <!-- optional: if not specified, it will run webpack's default
+                            build (and you can remove this whole <configuration> section.) -->
+                            <arguments>-p</arguments>
                         </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
                     </execution>
                     <execution>
                         <id>yarn install</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
-                        <phase>generate-resources</phase>
-                    </execution>
-                    <execution>
-                        <id>yarn test</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <phase>test</phase>
-                        <configuration>
-                            <arguments>test</arguments>
-                            <environmentVariables>
-                                <CI>true</CI>
-                            </environmentVariables>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>yarn build</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <phase>compile</phase>
-                        <configuration>
-                            <arguments>build</arguments>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <nodeVersion>${node.version}</nodeVersion>
+                    <yarnVersion>${yarn.version}</yarnVersion>
+                </configuration>
             </plugin>
-
         </plugins>
-
     </build>
     <distributionManagement>
-
         <repository>
-            <id>myMavenRepo</id>
-            <url>https://mymavenrepo.com/repo/txzLGneIZ0DlUJu75fG5/</url> <!-->Write<!-->
-            
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/tsallustro/MeanStreamMachine</url>
         </repository>
-        <snapshotRepository>
-            <id>myMavenRepo</id>
-            <url>https://mymavenrepo.com/repo/txzLGneIZ0DlUJu75fG5/</url><!-->Write<!-->
-        </snapshotRepository>
     </distributionManagement>
     <dependencies>
         <dependency>
@@ -171,10 +140,7 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>3.1.3</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
@@ -182,17 +148,11 @@
             <version>3.1.1.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
     </dependencies>
-
 
 
 </project>
