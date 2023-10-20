@@ -31,16 +31,13 @@ public class MSMController {
 
     @GetMapping("/api/details/{mediaId}")
     public DetailsDTO getDetailsById(@PathVariable UUID mediaId) {
-        log.info("Recieved details request for " + mediaId);
+        log.info("Received details request for " + mediaId);
         return mediaService.getMediaById(mediaId).toDto();
     }
 
     @GetMapping("/api/details/all")
     public List<DetailsDTO> getAllMedia() {
-
-
-        log.info("Recieved all media request");
-
+        log.info("Received all media request");
         return DetailsDTO.mediaListToDetailDTOList(mediaService.getAllMedia());
     }
 
@@ -49,7 +46,7 @@ public class MSMController {
     @GetMapping("/api/start/{mediaId}")
     public ResponseEntity<HttpStatus> startStream(@PathVariable UUID mediaId) {
 
-        log.info("Recieved start request for " + mediaId);
+        log.info("Received start request for " + mediaId);
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
 
@@ -57,17 +54,17 @@ public class MSMController {
 
     @GetMapping("/api/stop/{streamId}")
     public ResponseEntity<HttpStatus> getAllMedia(@PathVariable UUID streamId) {
-        log.info("Recieved stop request for " + streamId);
+        log.info("Received stop request for " + streamId);
 
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PostMapping("/api/upload")
-    public UploadResponse uploadMedia(@ModelAttribute UploadDTO requestdto) {
-        log.info("Recieved upload request. Name is " + requestdto.getName() + "; Media size is " + requestdto.getMedia().getSize() + " bytes");
+    public UploadResponse uploadMedia(@ModelAttribute UploadDTO uploadDTO) {
+        log.info("Received upload request. Name is " + uploadDTO.getName() + "; Media size is " + uploadDTO.getMedia().getSize() + " bytes");
         UploadResponse response = new UploadResponse();
 
-        response.setMediaId(mediaService.processUpload(requestdto));
+        response.setMediaId(mediaService.processUpload(uploadDTO));
         return response;
 
     }
@@ -75,7 +72,7 @@ public class MSMController {
     //Misc
     @GetMapping("/api/ping")
     public ResponseEntity<HttpStatus> ping() {
-        log.info("Recieved ping request");
+        log.info("Received ping request");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
