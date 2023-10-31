@@ -2,10 +2,32 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>MSM Home</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
+<div class="topnav">
+    <a class="active" href="home">Home</a>
+    <a href="actuator">Actuator</a>
+</div>
 <h1>This is the HOME PAGE</h1>
 
-<p>Click <a th:href="@{/react}">here</a> to see react</p>
+<div>
+    <table class="zui-table">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="details: ${allMedia}">
+            <td th:text="${details.name}"></td>
+            <td th:text="${details.type}"></td>
+            <td th:text="${details.uploadedDate}"></td>
+            <td>
+            </td>
+        </tr>
+
+    </table>
+</div>
 </body>
 </html>

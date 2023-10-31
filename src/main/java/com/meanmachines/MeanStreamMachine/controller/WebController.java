@@ -1,17 +1,24 @@
 package com.meanmachines.MeanStreamMachine.controller;
 
+import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
+import com.meanmachines.MeanStreamMachine.service.MediaService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
 public class WebController {
-    @RequestMapping(value = "/")
-    public String home(){
+    @Autowired
+    private MediaService mediaService;
+
+    @RequestMapping(value = {"/","/home"})
+    public String home(Model model) {
+
+        model.addAttribute("allMedia", DetailsDTO.mediaListToDetailDTOList(mediaService.getAllMedia()));
         return "home";
     }
 
-    @RequestMapping(value = "/react")
-    public String react(){
-        return "react-page";
-    }
 }
