@@ -12,3 +12,6 @@ spring:
 
 storage:
   media-dir: #TODO
+
+exceptions:
+  STACK_VERBOSE: false

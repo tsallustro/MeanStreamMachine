@@ -11,3 +11,7 @@ spring:
 logging:
   level:
     root: info
+
+exceptions:
+  STORAGE_RESPONSE: The server encountered an error processing the request and could not recover
+  DBFAIL_RESPONSE: The server ecountered an error fetching the requested data and could not recover

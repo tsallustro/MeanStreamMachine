@@ -17,3 +17,6 @@ storage:
 logging:
   level:
     root: info
+
+exceptions:
+  STACK_VERBOSE: true
