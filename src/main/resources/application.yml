@@ -11,3 +11,6 @@ spring:
 logging:
   level:
     root: info
+
+exceptions:
+  STORAGE_RESPONSE: The server encountered an error processing the request and could not recover

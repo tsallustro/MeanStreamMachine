@@ -1,6 +1,6 @@
 package com.meanmachines.MeanStreamMachine.controller;
 
-import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
+import com.meanmachines.MeanStreamMachine.exception.StorageException;
 import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
 import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
 import com.meanmachines.MeanStreamMachine.model.dto.response.UploadResponse;
@@ -74,6 +74,12 @@ public class MSMController {
     public ResponseEntity<HttpStatus> ping() {
         log.info("Received ping request");
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/api/ex")
+    public void testException(){
+        log.info("Received exception request");
+        throw new StorageException("Storagemin");
     }
 
 

@@ -1,5 +1,6 @@
 package com.meanmachines.MeanStreamMachine.service;
 
+import com.meanmachines.MeanStreamMachine.exception.DatabaseFileNotFoundException;
 import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
 import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
 import com.meanmachines.MeanStreamMachine.repositories.MediaRepository;
@@ -28,7 +29,9 @@ public class MediaService {
     }
 
     public Media getMediaById(UUID id) {
-        return mediaRepository.findByMediaId(id);
+        Media media =  mediaRepository.findByMediaId(id);
+        if(media == null) throw new DatabaseFileNotFoundException("The media requested does not exist");
+        return media;
     }
 
     public List<Media> getAllMedia() {
