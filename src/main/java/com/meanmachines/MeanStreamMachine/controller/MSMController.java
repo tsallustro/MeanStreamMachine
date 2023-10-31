@@ -1,6 +1,5 @@
 package com.meanmachines.MeanStreamMachine.controller;
 
-import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
 import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
 import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
 import com.meanmachines.MeanStreamMachine.model.dto.response.UploadResponse;
@@ -72,9 +71,9 @@ public class MSMController {
     //Misc
     @GetMapping("/api/ping")
     public ResponseEntity<HttpStatus> ping() {
+
         log.info("Received ping request");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 }
