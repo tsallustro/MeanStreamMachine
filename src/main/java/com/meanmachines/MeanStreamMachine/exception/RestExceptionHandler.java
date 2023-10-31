@@ -16,7 +16,7 @@ public class RestExceptionHandler{
     @Value("${exceptions.DBFAIL_RESPONSE}")
     String DBFAIL_RESPONSE;
 
-    @Value("${exceptions.stack_verbose}")
+    @Value("${exceptions.STACK_VERBOSE}")
     Boolean STACK_VERBOSE;
 
     @ExceptionHandler(DatabaseFileNotFoundException.class)
