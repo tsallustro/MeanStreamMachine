@@ -2,9 +2,38 @@
 <head>
     <title>This is the upload page!</title>
     <link th:href="@{/styles.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<h1> We're working on it... ;)</h1>
+<h1>Upload a file</h1>
+<div class="container" style="max-width: 500px">
+
+    <form
+            id="uploadForm"
+            method="post"
+            th:action="@{/files/upload}"
+            enctype="multipart/form-data">
+        <label for="input-name">Select a name</label><br>
+        <input id="input-name" type="text" name="name"/><br>
+        <label for="input-file">Select a file</label><br>
+        <input id="input-file" type="file" name="file"/><br>
+        <button class="btn btn-sm btn-outline-success float-right" type="submit">
+            Upload
+        </button>
+    </form>
+
+    <div
+            th:if="${message != null}"
+            class="alert alert-secondary alert-dismissible fade show text-center message mt-3"
+            role="alert">
+        [[${message}]]
+        <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+</div>
 </body>
 </html>

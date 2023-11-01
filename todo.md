@@ -1,14 +1,15 @@
 # TODO
 
 ## Architecture
-* Set up new maven repo
 * Deploy and test
 
 ## Backend
 * Start/stop stream
 * Security
+* Logging to file
+* Logging based on env var
+* File upload regex
 
 ## Frontend
 * Upload page
 * Details page
-* Login/logout
