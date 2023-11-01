@@ -18,6 +18,11 @@ public class WebController {
     String login() {
         return "login";
     }
+
+    @GetMapping("/upload")
+    String upload() {
+        return "upload";
+    }
     @RequestMapping(value = {"/","/home"})
     public String home(Model model) {
 
