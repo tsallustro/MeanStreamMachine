@@ -36,6 +36,7 @@ public class Media {
 
     public DetailsDTO toDto(){
         DetailsDTO dto = new DetailsDTO();
+        dto.setId(mediaId);
         dto.setName(title);
         dto.setType(fileFormat);
         dto.setUploadedDate(uploadDate);

@@ -41,8 +41,7 @@ public class MSMController {
     }
 
     //Stream Controls
-
-    @GetMapping("/api/start/{mediaId}")
+    @PostMapping("/api/start/{mediaId}")
     public ResponseEntity<HttpStatus> startStream(@PathVariable UUID mediaId) {
 
         log.info("Received start request for " + mediaId);
