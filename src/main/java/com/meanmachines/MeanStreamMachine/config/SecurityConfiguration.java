@@ -16,9 +16,10 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((authz) -> authz.anyRequest()
-                .hasRole("USER"))
-                .formLogin(login -> login.loginPage("/login").permitAll());
+        http.authorizeHttpRequests((authz) -> authz.anyRequest().hasRole("USER"))
+                .formLogin(login -> login.loginPage("/login").permitAll())
+                .logout((logout) -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout"))
+                .csrf((csrf) -> csrf.disable());
 
         return http.build();
     }
