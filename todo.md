@@ -8,7 +8,6 @@
 * Security
 * Logging to file
 * Logging based on env var
-* File upload regex
 * Download?
 * Max upload size
 

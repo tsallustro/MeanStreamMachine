@@ -5,6 +5,7 @@ import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
 import com.meanmachines.MeanStreamMachine.service.MediaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Controller
 public class WebController {
+    @Value("${exceptions.UPLOAD_VALIDATION_FAIL}")
+    String VALIDATION_FAIL;
     @Autowired
     private MediaService mediaService;
+
     @GetMapping("/login")
     String login() {
         return "login";
@@ -27,7 +31,8 @@ public class WebController {
     String upload() {
         return "upload";
     }
-    @RequestMapping(value = {"/","/home"})
+
+    @RequestMapping(value = {"/", "/home"})
     public String home(Model model) {
 
         model.addAttribute("allMedia", DetailsDTO.mediaListToDetailDTOList(mediaService.getAllMedia()));
@@ -39,19 +44,28 @@ public class WebController {
         UploadDTO dto = new UploadDTO();
         dto.setMedia(file);
         dto.setName(name);
-        String message = "";
+        String statusMessage = "";
+        boolean success = false;
 
-        try {
-            mediaService.processUpload(dto);
+        //Validate name
+        if (!name.matches("^[a-zA-Z0-9 ]{1,32}$")) {
+            log.error(VALIDATION_FAIL);
+            statusMessage = VALIDATION_FAIL;
 
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            model.addAttribute("message", message);
-        } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
-            model.addAttribute("message", message);
+        } else {
+            try {
+                //upload file
+                mediaService.processUpload(dto);
+                statusMessage = "Uploaded the file successfully: " + file.getOriginalFilename();
+                success = true;
+            } catch (Exception e) {
+                statusMessage = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();
+            }
+
+
         }
-
+        model.addAttribute("message", statusMessage);
+        model.addAttribute("success", success);
         return "upload";
     }
-
 }

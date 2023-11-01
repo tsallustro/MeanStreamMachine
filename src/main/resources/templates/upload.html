@@ -26,7 +26,7 @@
     </form>
 
     <div
-            class="alert alert-secondary alert-dismissible fade show text-center message mt-3"
+            th:class="'upload-banner '+${success ? 'success' : 'fail'}"
             role="alert"
             th:if="${message != null}">
         [[${message}]]

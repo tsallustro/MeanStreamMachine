@@ -49,3 +49,17 @@
   background-color: #04AA6D;
   color: white;
 }
+
+.upload-banner{
+    padding: 20px;
+    color: white;
+    margin-bottom: 15px;
+    background-color: #696969;
+
+}
+.upload-banner.success{
+    background-color: #04AA6D;
+}
+.upload-banner.fail{
+     background-color: #f44336; /* Red */
+ }
