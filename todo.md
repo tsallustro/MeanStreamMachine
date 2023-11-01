@@ -5,12 +5,16 @@
 
 ## Backend
 * Start/stop stream
-* Security
 * Logging to file
 * Logging based on env var
 * Download?
 * Max upload size
 
 ## Frontend
-* Upload page
-* Details page
+* Admin pages
+  * **Integrate with security** 
+  * All active streams page
+    * Stop button
+  * Actuator
+  * 
+
