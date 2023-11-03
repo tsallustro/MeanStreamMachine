@@ -31,7 +31,10 @@ public class WebController {
     String upload() {
         return "upload";
     }
-
+    @GetMapping("/register")
+    String register() {
+        return "register";
+    }
     @RequestMapping(value = {"/", "/home"})
     public String home(Model model) {
 
