@@ -47,7 +47,7 @@ public class WebController {
         UploadDTO dto = new UploadDTO();
         dto.setMedia(file);
         dto.setName(name);
-        String statusMessage = "";
+        String statusMessage;
         boolean success = false;
 
         //Validate name
