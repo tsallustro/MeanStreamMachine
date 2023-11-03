@@ -1,8 +1,11 @@
 package com.meanmachines.MeanStreamMachine.controller;
 
+import com.meanmachines.MeanStreamMachine.model.dto.request.RegisterRequest;
 import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
 import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
+import com.meanmachines.MeanStreamMachine.model.dto.response.RegisterResponse;
 import com.meanmachines.MeanStreamMachine.service.MediaService;
+import com.meanmachines.MeanStreamMachine.service.UserRegistrationManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +24,8 @@ public class WebController {
     String VALIDATION_FAIL;
     @Autowired
     private MediaService mediaService;
+    @Autowired
+    UserRegistrationManager userRegistrationManager;
 
     @GetMapping("/login")
     String login() {
@@ -41,7 +46,15 @@ public class WebController {
         model.addAttribute("allMedia", DetailsDTO.mediaListToDetailDTOList(mediaService.getAllMedia()));
         return "home";
     }
+    @PostMapping("/register/new")
+    public String newUser(Model model, @RequestParam("user") String user, @RequestParam("pass1")String pass1, @RequestParam("pass2")String pass2) {
 
+        RegisterResponse response = userRegistrationManager.createNewUser(new RegisterRequest(user, pass1, pass2));
+
+        model.addAttribute("message", response.getMessage());
+        model.addAttribute("success", response.isSuccess());
+        return "register";
+    }
     @PostMapping("/files/upload")
     public String uploadFile(Model model, @RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
         UploadDTO dto = new UploadDTO();
@@ -71,4 +84,5 @@ public class WebController {
         model.addAttribute("success", success);
         return "upload";
     }
+
 }
