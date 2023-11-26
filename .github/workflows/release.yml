@@ -1,5 +1,5 @@
-name: Build Deploy
-run-name: ${{ github.actor }} is building
+name: Release
+run-name: Mean Stream Machine ${{ inputs.version }} 
 
 on: 
   workflow_dispatch:
