@@ -1,9 +1,13 @@
 name: Build Deploy
 run-name: ${{ github.actor }} is building
 
-on:
-  release:
-    types: [created]
+on: 
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+      
 
 jobs:
   build:
