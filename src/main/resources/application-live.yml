@@ -9,6 +9,9 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+logging:
+  level:
+    root: info
 
 storage:
   media-dir: #TODO

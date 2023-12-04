@@ -3,12 +3,15 @@ server:
     context-path: /meanstream
   port: 60185
   ssl:
-    key-store: keystore.p12
+    key-store: classpath:keystore.p12
     key-store-password: machine
     keyStoreType: PKCS12
     keyAlias: tomcat
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
   application:
     name: meanstreammachine
   jpa:
