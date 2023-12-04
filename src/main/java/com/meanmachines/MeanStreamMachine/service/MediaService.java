@@ -25,9 +25,9 @@ public class MediaService {
 
 
 
-    public Media getMediaById(UUID id) {
+    public Media getMediaById(UUID id){
         Media media =  mediaRepository.findByMediaId(id);
-        if(media == null) throw new DatabaseFileNotFoundException("The media requested does not exist");
+        if(media == null) throw new DatabaseFileNotFoundException("The media requested ("+id+") does not exist");
         return media;
     }
 
@@ -58,9 +58,15 @@ public class MediaService {
         return writeUploadToDb(media);
     }
 
-//    public String StartStream(){
-//
-//    }
+    public String startStream(UUID mediaId) {
+        String stream_url = "http://www.google.com";
+        // 1. Start stream
+
+        // 2. Write to db
+
+        // 3. Return stream url
+        return stream_url;
+    }
     UUID writeUploadToDb(Media media) {
         Media m = mediaRepository.save(media);
         return m.getMediaId();

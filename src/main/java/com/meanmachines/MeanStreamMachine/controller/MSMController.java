@@ -44,9 +44,9 @@ public class MSMController {
     //Stream Controls
     @GetMapping("/api/start/{mediaId}")
     public RedirectView startStream(@PathVariable UUID mediaId) {
-
+        String url = mediaService.startStream(mediaId);
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://www.google.com");
+        redirectView.setUrl(url);
         return redirectView;
 
 

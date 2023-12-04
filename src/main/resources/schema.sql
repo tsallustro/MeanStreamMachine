@@ -8,7 +8,7 @@ CREATE TABLE MEDIA (
     title VARCHAR NOT NULL,
     canonical_name VARCHAR,
     file_format VARCHAR(10),
-    upload_ts DATE,
+    upload_ts TIMESTAMP,
     PRIMARY KEY (media_id)
 );
 
