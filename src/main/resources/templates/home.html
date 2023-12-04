@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <title>MSM Home</title>
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <h1>This is the HOME PAGE</h1>
 
-<p>Click <a th:href="@{/react}">here</a> to see react</p>
+<div>
+    <table class="zui-table">
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="details: ${allMedia}">
+            <td th:text="${details.name}"></td>
+            <td th:text="${details.type}"></td>
+            <td th:text="${details.uploadedDate}"></td>
+            <td>
+                <form id="uploadForm"
+                      method="post"
+                      th:action="@{/api/start/} + ${details.id}">
+                    <input type="submit" value="Stream">
+                </form>
+            </td>
+        </tr>
+
+    </table>
+</div>
 </body>
 </html>

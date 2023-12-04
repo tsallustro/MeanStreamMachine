@@ -2,8 +2,16 @@ server:
   servlet:
     context-path: /meanstream
   port: 60185
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: machine
+    keyStoreType: PKCS12
+    keyAlias: tomcat
 
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
   application:
     name: meanstreammachine
   jpa:
@@ -15,3 +23,4 @@ logging:
 exceptions:
   STORAGE_RESPONSE: The server encountered an error processing the request and could not recover
   DBFAIL_RESPONSE: The server ecountered an error fetching the requested data and could not recover
+  UPLOAD_VALIDATION_FAIL: File name must only include letters, numbers, spaces, and be no more than 32 characters

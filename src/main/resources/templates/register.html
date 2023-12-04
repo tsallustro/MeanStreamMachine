@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <title>Register</title>
+    <link th:href="@{/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Register</h1>
+<div class="container" style="max-width: 500px">
+
+    <form
+            enctype="multipart/form-data"
+            id="uploadForm"
+            method="post"
+            th:action="@{/register/new}">
+        <label for="input-user">Enter a username</label><br>
+        <input id="input-user" name="user" type="text"/><br>
+        <label for="input-pass1">Enter a password</label><br>
+        <input id="input-pass1" name="pass1" type="password"/><br>
+        <label for="input-pass2">Enter password again</label><br>
+        <input id="input-pass2" name="pass2" type="password"/><br>
+        <button class="btn btn-sm btn-outline-success float-right" type="submit">
+            Register
+        </button>
+    </form>
+
+    <div
+            th:class="'upload-banner '+${success ? 'success' : 'fail'}"
+            role="alert"
+            th:if="${message != null}">
+        [[${message}]]
+        <button aria-label="Close" class="close btn-sm" data-dismiss="alert" type="button">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+</div>
+</body>
+
+</html>

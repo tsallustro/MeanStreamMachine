@@ -41,8 +41,7 @@ public class MSMController {
     }
 
     //Stream Controls
-
-    @GetMapping("/api/start/{mediaId}")
+    @PostMapping("/api/start/{mediaId}")
     public ResponseEntity<HttpStatus> startStream(@PathVariable UUID mediaId) {
 
         log.info("Received start request for " + mediaId);
@@ -52,7 +51,7 @@ public class MSMController {
     }
 
     @GetMapping("/api/stop/{streamId}")
-    public ResponseEntity<HttpStatus> getAllMedia(@PathVariable UUID streamId) {
+    public ResponseEntity<HttpStatus> stopStream(@PathVariable UUID streamId) {
         log.info("Received stop request for " + streamId);
 
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);

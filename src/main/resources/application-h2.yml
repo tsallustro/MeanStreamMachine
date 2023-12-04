@@ -10,13 +10,15 @@ spring:
       path: /h2-console
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
 
-storage:
-  media-dir: C:\Users\Tony\dev\MeanMachines\MeanStreamMachine\upload_tmp
 logging:
   level:
     root: info
+
+storage:
+  media-dir: Z:\MeanStream\MeanStreamMachine\upload_tmp
 
 exceptions:
   STACK_VERBOSE: true

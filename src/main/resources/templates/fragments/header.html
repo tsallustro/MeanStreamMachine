@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    ...
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <div class="topnav">
+        <a th:href="@{/home}">Home</a>
+        <a th:href="@{/upload}">Upload</a>
+        <a th:href="@{/logout}" class="split">Logout</a>
+    </div>
+</div>
+</body>
+</html>

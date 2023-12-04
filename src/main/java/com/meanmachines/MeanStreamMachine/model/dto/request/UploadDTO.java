@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadDTO {
 
     /**
-     * Only allowable characters are a-zA-Z 0-9 and spaces.
+     * Only allowable characters are a-z A-Z 0-9 and spaces, up to 32 characters.
      */
     private String name;
 
