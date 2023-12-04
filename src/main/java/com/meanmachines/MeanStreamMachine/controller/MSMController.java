@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.UUID;
@@ -41,11 +42,12 @@ public class MSMController {
     }
 
     //Stream Controls
-    @PostMapping("/api/start/{mediaId}")
-    public ResponseEntity<HttpStatus> startStream(@PathVariable UUID mediaId) {
+    @GetMapping("/api/start/{mediaId}")
+    public RedirectView startStream(@PathVariable UUID mediaId) {
 
-        log.info("Received start request for " + mediaId);
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://www.google.com");
+        return redirectView;
 
 
     }

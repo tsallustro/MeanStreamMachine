@@ -22,10 +22,10 @@ public class UserRegistrationManager {
 
     String FAIL_PASSWORDS_DONT_MATCH = "Passwords do not match";
     String FAIL_INVALID_PASSWORD = "Passwords must only be mixed case letters, numbers, and be 8-32 characters";
-    String FAIL_INVALID_USERNAME = "Username must be only letters and be no more than 12 characters";
+    String FAIL_INVALID_USERNAME = "Username must be only letters and be no more than 16 characters";
 
     String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,32}$";
-    String USERNAME_REGEX = "^[a-zA-Z0-9]{1,12}$";
+    String USERNAME_REGEX = "^[a-zA-Z0-9]{1,16}$";
 
 
     public RegisterResponse createNewUser(RegisterRequest request) {

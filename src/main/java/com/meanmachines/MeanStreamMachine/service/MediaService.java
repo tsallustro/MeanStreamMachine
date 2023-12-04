@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,10 +23,7 @@ public class MediaService {
     @Autowired
     private StorageService storageService;
 
-    public UUID writeToDb(Media media) {
-        Media m = mediaRepository.save(media);
-        return m.getMediaId();
-    }
+
 
     public Media getMediaById(UUID id) {
         Media media =  mediaRepository.findByMediaId(id);
@@ -38,10 +35,7 @@ public class MediaService {
         return mediaRepository.selectAll();
     }
 
-    public static String toCanonicalName(String str) {
 
-        return str.trim().replaceAll("\\s+", "_");
-    }
 
     public UUID processUpload(UploadDTO requestdto) {
 
@@ -59,8 +53,22 @@ public class MediaService {
         media.setTitle(name);
         media.setCanonicalName(canonicalName);
         media.setFileFormat(extension);
-        media.setUploadDate(new Date());
+        media.setUploadTS(new Timestamp(System.currentTimeMillis()));
         storageService.store(mediaFile);
-        return writeToDb(media);
+        return writeUploadToDb(media);
     }
+
+//    public String StartStream(){
+//
+//    }
+    UUID writeUploadToDb(Media media) {
+        Media m = mediaRepository.save(media);
+        return m.getMediaId();
+    }
+    static String toCanonicalName(String str) {
+
+        return str.trim().replaceAll("\\s+", "_");
+    }
+
+
 }

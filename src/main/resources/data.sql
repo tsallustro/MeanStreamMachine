@@ -1,1 +1,1 @@
-insert into media(media_id,title,canonical_name,file_format,upload_date) values('224a830e-cb32-4fdf-8af7-eb7cccf6104a','Dummy upload','dummy_upload','mp4',CURRENT_TIMESTAMP)
+insert into media(media_id,title,canonical_name,file_format,upload_ts) values('224a830e-cb32-4fdf-8af7-eb7cccf6104a','Dummy upload','dummy_upload','mp4',CURRENT_TIMESTAMP)

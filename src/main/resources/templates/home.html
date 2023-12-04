@@ -22,7 +22,7 @@
             <td th:text="${details.uploadedDate}"></td>
             <td>
                 <form id="uploadForm"
-                      method="post"
+                      method="get"
                       th:action="@{/api/start/} + ${details.id}">
                     <input type="submit" value="Stream">
                 </form>
