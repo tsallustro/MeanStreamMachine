@@ -35,7 +35,6 @@ build/
 ### Upload stuff ###
 /upload_tmp
 
-### Web ###
-.DS_STORE
-node_modules
-yarn.lock
+### Updater stuff ###
+/updater/venv/
+/updater/bin/

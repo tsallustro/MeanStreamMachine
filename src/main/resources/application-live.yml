@@ -14,7 +14,7 @@ logging:
     root: info
 
 storage:
-  media-dir: #TODO
+  media-dir: /home/machine/MeanMachines/MeanStreamMachine/media
 
 exceptions:
   STACK_VERBOSE: false
