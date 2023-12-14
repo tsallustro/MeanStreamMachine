@@ -106,6 +106,7 @@ def install_new(new_version):
     run_subprocess_command(permissions_command)
 
     print("Restarting " + APP_NAME + ".service...")
+    start_service_command = ['sudo', 'systemctl', 'daemon_reload']
     start_service_command = ['sudo', 'systemctl', 'start', APP_NAME + '.service']
     run_subprocess_command(start_service_command)
 
