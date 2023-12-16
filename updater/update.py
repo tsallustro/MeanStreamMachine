@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import getopt
 import glob
 import os
@@ -5,9 +6,11 @@ import re
 import shutil
 import subprocess
 import sys
+
 import requests
 
 arguments = {
+    "-s": "update as a STAGE version; must be run manually",
     "-v": "(required) version number to install",
     "-r": "do not delete files for previous versions",
     "-h": "show this menu"
@@ -18,6 +21,9 @@ github_auth_token = os.environ["MSM_GITHUB_TOKEN"]
 github_api_version = '2022-11-28'
 
 download_url_prefix = 'https://maven.pkg.github.com/tsallustro/MeanStreamMachine/com.meanmachines.meanstreammachine/'
+local_download_location_prefix = './binaries/' + MAVEN_ARTIFACT_NAME + '-'
+jar_path = ''
+bin_path = ''
 
 
 # Process:
@@ -32,16 +38,24 @@ def main(argv):
     version = ''
     remove_old = True
     curl_verbose = False
-    opts, args = getopt.getopt(argv, "rhv:", [])
+    opts, args = getopt.getopt(argv, "usrhv:", [])
     for opt, arg in opts:
         if opt == "-h":
             print('Arguments: ' + str(arguments))
-            sys.exit()
+            sys.exit(0)
         elif opt == '-v':
             version = arg
         elif opt == '-r':
             remove_old = False
-
+        elif opt == '-s':
+            print("STAGE version has been specified")
+            download_new_version(version, True)
+            print("Download finished. Run manually with java -jar <jar> --spring.profiles.active=<profile>")
+            sys.exit(0)
+        elif opt == '-u':
+            print("Uninstalling old versions...")
+            uninstall_old('uninstall', True)
+            sys.exit(0)
 
     if not version:
         print('Version not provided; use -v <version or --version <version>')
@@ -49,30 +63,36 @@ def main(argv):
 
     print('Starting MSM Updater with version ' + version)
 
-    download_new_version(version)
+    download_new_version(version, False)
     uninstall_old(version, remove_old)
     install_new(version)
 
 
-def download_new_version(version):
-    download_location = './' + MAVEN_ARTIFACT_NAME + '-' + version + '/bin'
+def download_new_version(version, is_stage):
+    download_location = local_download_location_prefix + version + '-stage' if is_stage else '' + '/bin'
+    global bin_path
+    bin_path = download_location
+
     obj_name = MAVEN_ARTIFACT_NAME + '-' + version + '.jar'
+    global jar_path
+    jar_path = download_location + '/' + obj_name
+
     print('Downloading version ' + version + ' to ' + download_location + '...')
     headers = {
         'User-Agent': 'msmUpdater',
-        'Authorization': 'Bearer '+github_auth_token,
+        'Authorization': 'Bearer ' + github_auth_token,
         'X-GitHub-Api-Version': github_api_version
     }
     download_url_str = download_url_prefix + version + '/' + obj_name
     if not os.path.exists(download_location):
         os.makedirs(download_location)
-        print("Created folder "+download_location)
+        print("Created folder " + download_location)
     response = requests.get(download_url_str, headers=headers)
 
     if response.status_code == 200:
-        with open(download_location+'/'+obj_name, 'wb') as file:
+        with open(jar_path, 'wb') as file:
             file.write(response.content)
-        print(f"File downloaded successfully as {download_location}")
+        print(f"File downloaded successfully as {jar_path}")
     else:
         print("Failed to download the file")
 
@@ -88,16 +108,12 @@ def uninstall_old(new_version, remove_old):
 
 
 def install_new(new_version):
-    app_version_str = MAVEN_ARTIFACT_NAME + "-" + new_version
-
     print("Writing new environment variables...")
     print("Bin path...")
-    bin_path = os.getcwd() + "/" + app_version_str + "/bin"
     print("Bin path is " + bin_path)
     update_config(APP_NAME + "_BIN", bin_path)
 
     print("Jar path...")
-    jar_path = bin_path + "/" + app_version_str + ".jar"
     print("Jar path is " + jar_path)
     update_config(APP_NAME + "_JAR", jar_path)
 
@@ -147,6 +163,7 @@ def remove_old_versions_except_version(base_path, specified_version):
             print(f"Removed: {directory}")
         except Exception as e:
             print(f"Failed to remove {directory}: {e}")
+
 
 def run_subprocess_command(command_args_list):
     subprocess_timeout_seconds = 60

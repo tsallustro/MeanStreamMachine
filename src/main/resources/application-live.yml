@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/meanmachines
+    url: jdbc:postgresql://192.168.0.128:5432/template1
     username: postgres
     password: postgres
   jpa:
@@ -14,7 +14,7 @@ logging:
     root: info
 
 storage:
-  media-dir: /home/machine/MeanMachines/MeanStreamMachine/media
+  media-dir: /home/machine/MeanMachines/MeanStreamMachine/resources/media
 
 exceptions:
   STACK_VERBOSE: false

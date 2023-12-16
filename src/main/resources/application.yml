@@ -2,12 +2,6 @@ server:
   servlet:
     context-path: /meanstream
   port: 60185
-  ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: machine
-    keyStoreType: PKCS12
-    keyAlias: tomcat
-
 spring:
   servlet:
     multipart:
