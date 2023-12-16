@@ -8,7 +8,6 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,10 +15,9 @@ import java.util.UUID;
 @Table(name = "media")
 public class Media {
     @Id
-    @Column(name = "media_id", nullable = false)
-    @JdbcTypeCode(SqlTypes.UUID)
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID mediaId;
+    @Column(name = "media_id", nullable = false, length = 36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private String mediaId;
 
     @Column(name = "title", nullable = false)
     @JdbcTypeCode(SqlTypes.VARCHAR)

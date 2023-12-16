@@ -6,11 +6,10 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 public class DetailsDTO {
-    private UUID id;
+    private String id;
     private String name;
     private String type;
     private Date uploadedDate;
