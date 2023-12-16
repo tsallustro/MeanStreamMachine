@@ -71,8 +71,8 @@ public class WebController {
         } else {
             try {
                 //upload file
-                mediaService.processUpload(dto);
-                statusMessage = "Uploaded the file successfully: " + file.getOriginalFilename();
+                String id = mediaService.processUpload(dto);
+                statusMessage = "Uploaded the file successfully: " + file.getOriginalFilename()+" with id "+id;
                 success = true;
             } catch (Exception e) {
                 statusMessage = "Could not upload the file: " + file.getOriginalFilename() + ". Error: " + e.getMessage();

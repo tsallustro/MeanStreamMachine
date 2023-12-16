@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -23,12 +22,12 @@ public class MediaService {
     @Autowired
     private StorageService storageService;
 
-    public UUID writeToDb(Media media) {
+    public String writeToDb(Media media) {
         Media m = mediaRepository.save(media);
         return m.getMediaId();
     }
 
-    public Media getMediaById(UUID id) {
+    public Media getMediaById(String id) {
         Media media =  mediaRepository.findByMediaId(id);
         if(media == null) throw new DatabaseFileNotFoundException("The media requested does not exist");
         return media;
@@ -43,7 +42,7 @@ public class MediaService {
         return str.trim().replaceAll("\\s+", "_");
     }
 
-    public UUID processUpload(UploadDTO requestdto) {
+    public String processUpload(UploadDTO requestdto) {
 
         //Information
         String name = requestdto.getName();

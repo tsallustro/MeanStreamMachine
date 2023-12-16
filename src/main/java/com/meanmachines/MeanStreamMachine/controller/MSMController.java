@@ -29,7 +29,7 @@ public class MSMController {
     //Media Details
 
     @GetMapping("/api/details/{mediaId}")
-    public DetailsDTO getDetailsById(@PathVariable UUID mediaId) {
+    public DetailsDTO getDetailsById(@PathVariable String mediaId) {
         log.info("Received details request for " + mediaId);
         return mediaService.getMediaById(mediaId).toDto();
     }
@@ -42,7 +42,7 @@ public class MSMController {
 
     //Stream Controls
     @PostMapping("/api/start/{mediaId}")
-    public ResponseEntity<HttpStatus> startStream(@PathVariable UUID mediaId) {
+    public ResponseEntity<HttpStatus> startStream(@PathVariable String mediaId) {
 
         log.info("Received start request for " + mediaId);
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -51,7 +51,7 @@ public class MSMController {
     }
 
     @GetMapping("/api/stop/{streamId}")
-    public ResponseEntity<HttpStatus> stopStream(@PathVariable UUID streamId) {
+    public ResponseEntity<HttpStatus> stopStream(@PathVariable String streamId) {
         log.info("Received stop request for " + streamId);
 
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
