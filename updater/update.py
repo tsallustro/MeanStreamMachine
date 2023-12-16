@@ -6,7 +6,6 @@ import re
 import shutil
 import subprocess
 import sys
-
 import requests
 
 arguments = {
@@ -69,7 +68,7 @@ def main(argv):
 
 
 def download_new_version(version, is_stage):
-    download_location = local_download_location_prefix + version + '-stage' if is_stage else '' + '/bin'
+    download_location = local_download_location_prefix + version + ('-stage' if is_stage else '') + '/bin'
     global bin_path
     bin_path = download_location
 
