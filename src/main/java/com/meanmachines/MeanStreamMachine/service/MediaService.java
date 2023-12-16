@@ -4,6 +4,7 @@ import com.meanmachines.MeanStreamMachine.exception.DatabaseFileNotFoundExceptio
 import com.meanmachines.MeanStreamMachine.model.dbentities.Media;
 import com.meanmachines.MeanStreamMachine.model.dto.request.UploadDTO;
 import com.meanmachines.MeanStreamMachine.repositories.MediaRepository;
+import com.meanmachines.MeanStreamMachine.util.FormatterUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class MediaService {
+
     @Autowired
     private MediaRepository mediaRepository;
 
@@ -58,7 +60,8 @@ public class MediaService {
         media.setTitle(name);
         media.setCanonicalName(canonicalName);
         media.setFileFormat(extension);
-        media.setUploadDate(new Date());
+        media.setUploadDate(FormatterUtil.dateToString(new Date()));
+
         storageService.store(mediaFile);
         return writeToDb(media);
     }
