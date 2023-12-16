@@ -4,6 +4,8 @@ server:
   port: 60185
   address: localhost
 spring:
+  banner:
+    location: classpath:banner.txt
   servlet:
     multipart:
       max-file-size: 10MB
