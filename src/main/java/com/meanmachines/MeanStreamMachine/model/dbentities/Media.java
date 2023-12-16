@@ -1,10 +1,7 @@
 package com.meanmachines.MeanStreamMachine.model.dbentities;
 
 import com.meanmachines.MeanStreamMachine.model.dto.response.DetailsDTO;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -18,6 +15,7 @@ public class Media {
     @Id
     @Column(name = "media_id", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String mediaId;
 
     @Column(name = "title", nullable = false)
