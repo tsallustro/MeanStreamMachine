@@ -1,7 +1,8 @@
 # TODO
 
 ## Architecture
-* Deploy and test
+* SSL/HTTPS
+* Elevate admin in db
 
 ## Backend
 * Start stream
@@ -14,12 +15,12 @@
   * All active streams page
     * Stop button
   * Actuator
-* Register page
+  * User management admin page?
 
 ## Undecided
 * Download?
 * Max upload size - what is?
-* User management admin page?
+
 
 ## Security
 * Secure admin pages
