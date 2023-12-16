@@ -7,7 +7,19 @@ import shutil
 import subprocess
 import sys
 import requests
+flair_str = """
+               _   .-')      .-')   _   .-')                         _ (`-.  _ .-') _     ('-.     .-') _     ('-.  _  .-')              
+    .-.   ( '.( OO )_   ( OO ).( '.( OO )_                      ( (OO  )( (  OO) )   ( OO ).-.(  OO) )  _(  OO)( \( -O )     .-.     
+ .-,| |,-. ,--.   ,--.)(_)---\_),--.   ,--.)       ,--. ,--.   _.`     \ \     .'_   / . --. //     '._(,------.,------.  .-,| |,-.  
+ _\ ' ' /_ |   `.'   | /    _ | |   `.'   |        |  | |  |  (__...--'' ,`'--..._)  | \-.  \ |'--...__)|  .---'|   /`. ' _\ ' ' /_  
+(__     __)|         | \  :` `. |         |        |  | | .-') |  /  | | |  |  \  '.-'-'  |  |'--.  .--'|  |    |  /  | |(__     __) 
+  / . . \  |  |'.'|  |  '..`''.)|  |'.'|  |        |  |_|( OO )|  |_.' | |  |   ' | \| |_.'  |   |  |  (|  '--. |  |_.' |  / . . \   
+ `-'| |`-' |  |   |  | .-._)   \|  |   |  |        |  | | `-' /|  .___.' |  |   / :  |  .-.  |   |  |   |  .--' |  .  '.' `-'| |`-'  
+    `-'    |  |   |  | \       /|  |   |  |       ('  '-'(_.-' |  |      |  '--'  /  |  | |  |   |  |   |  `---.|  |\  \     `-'     
+           `--'   `--'  `-----' `--'   `--'         `-----'    `--'      `-------'   `--' `--'   `--'   `------'`--' '--'            
 
+                                 
+"""
 arguments = {
     "-s": "update as a STAGE version; must be run manually",
     "-v": "(required) version number to install",
@@ -33,6 +45,7 @@ bin_path = ''
 
 # Start here
 def main(argv):
+    print(flair_str)
     # Validate arguments
     version = ''
     remove_old = True
@@ -68,7 +81,12 @@ def main(argv):
 
 
 def download_new_version(version, is_stage):
-    download_location = local_download_location_prefix + version + ('-stage' if is_stage else '') + '/bin'
+    download_location = ''
+    if is_stage:
+        download_location = local_download_location_prefix + version + '-stage/bin'
+    else:
+        download_location = local_download_location_prefix + version + '/bin'
+
     global bin_path
     bin_path = download_location
 
