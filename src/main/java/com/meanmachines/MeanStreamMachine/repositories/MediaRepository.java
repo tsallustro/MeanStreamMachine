@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface MediaRepository extends JpaRepository<Media, UUID> {
-    Media findByMediaId(UUID mediaId);
+    Media findByMediaId(String mediaId);
 
     @NonNull
     Media save(Media media);
