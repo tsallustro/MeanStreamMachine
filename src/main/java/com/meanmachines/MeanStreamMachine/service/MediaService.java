@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Slf4j
@@ -60,7 +60,7 @@ public class MediaService {
         media.setTitle(name);
         media.setCanonicalName(canonicalName);
         media.setFileFormat(extension);
-        media.setUploadDate(FormatterUtil.dateToString(new Date()));
+        media.setUploadDate(FormatterUtil.dateToString(ZonedDateTime.now()));
 
         storageService.store(mediaFile);
         return writeToDb(media);

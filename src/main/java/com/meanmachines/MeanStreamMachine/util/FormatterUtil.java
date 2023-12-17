@@ -1,16 +1,16 @@
 package com.meanmachines.MeanStreamMachine.util;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class FormatterUtil {
-    private static final SimpleDateFormat TS_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
 
-    public static Date stringToDate(String dateStr) throws ParseException {
-        return TS_FORMAT.parse(dateStr);
+    public static ZonedDateTime stringToDate(String dateStr) throws ParseException {
+        return ZonedDateTime.parse(dateStr);
     }
-    public static String dateToString(Date date){
-        return TS_FORMAT.format(date);
+    public static String dateToString(ZonedDateTime date){
+        return date.format(formatter);
     }
 }
